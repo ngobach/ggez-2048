@@ -28,3 +28,7 @@ impl Display for Error {
 impl StdError for Error {}
 
 pub type Result<T> = CoreResult<T, Error>;
+
+pub fn map_to_error<T: StdError>(e: T) -> Error {
+    Error::from_error(e)
+}
