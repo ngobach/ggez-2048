@@ -1,13 +1,13 @@
+use super::cell::Cell;
+
 pub struct Board {
-    matrix: [[u64; 4]; 4],
+    matrix: [[Cell; 4]; 4],
 }
 
-impl Board {
-}
-
+impl Board {}
 
 pub fn new() -> Board {
     Board {
-        matrix: [[0; 4]; 4]
+        matrix: [[Cell::None; 4]; 4],
     }
 }

@@ -9,3 +9,5 @@ edition = "2018"
 [dependencies]
 ggez = "0.5.1"
 rand = "0.7.1"
+easer = "0.2.1"
+mint = "0.5.1"

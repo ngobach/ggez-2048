@@ -1,6 +1,10 @@
 use ggez::graphics::Color;
 
-pub const FROST: Color = Color::new(	0.533, 0.753, 0.816, 1.0);
-pub const RED: Color = Color::new(0.749, 0.38, 0.416, 1.0);
+// Nord Theme
+const NORD_0: Color = Color::new(0.18, 0.204, 0.251, 1.0);
+const NORD_1: Color = Color::new(0.231, 0.259, 0.322, 1.0);
+const NORD_2: Color = Color::new(0.263, 0.298, 0.369, 1.0);
+const NORD_3: Color = Color::new(0.298, 0.337, 0.416, 1.0);
 
-pub const BACKGROUND: Color = FROST;
+pub const BACKGROUND: Color = NORD_2;
+pub const TITLE: Color = NORD_0;

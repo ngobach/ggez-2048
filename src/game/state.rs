@@ -1,5 +1,6 @@
 use ggez::event::EventHandler;
-use ggez::{Context, GameError, graphics};
+use ggez::{graphics, Context, GameError};
+use mint;
 
 use super::board;
 
@@ -26,6 +27,8 @@ impl EventHandler for GameState {
 
     fn draw(&mut self, ctx: &mut Context) -> Result<(), GameError> {
         graphics::clear(ctx, super::colors::BACKGROUND);
+        let mut text = graphics::Text::new("GGEZ 2048");
+        graphics::draw(ctx, &text, ([2.0,2.0],));
         graphics::present(ctx)?;
         Ok(())
     }

@@ -1,11 +1,13 @@
-use crate::common::{Result, map_to_error};
+use crate::common::{map_to_error, Result};
+use ggez::conf::{WindowMode, WindowSetup};
+use ggez::event::EventsLoop;
 use ggez::{event, Context, ContextBuilder};
-use ggez::event::{EventsLoop};
-use ggez::conf::{WindowSetup, WindowMode};
 
-mod state;
-mod colors;
 mod board;
+mod cell;
+mod colors;
+mod state;
+mod fonts;
 
 pub struct Game {
     ctx: Context,
@@ -23,9 +25,13 @@ impl Game {
 }
 
 pub fn new() -> Result<Game> {
-    let (u,v) = ContextBuilder::new("2048", "BachNX")
+    let (u, v) = ContextBuilder::new("2048", "BachNX")
         .window_setup(WindowSetup::default().title("RUST 2048"))
-        .window_mode(WindowMode::default().resizable(false).dimensions(400.0, 600.0))
+        .window_mode(
+            WindowMode::default()
+                .resizable(false)
+                .dimensions(400.0, 600.0),
+        )
         .build()
         .map_err(map_to_error)?;
     Ok(Game {
