@@ -94,16 +94,16 @@ pub fn compute_layout() -> GameLayout {
                     height: Dimension::Auto,
                 },
                 padding: stretch::geometry::Rect {
-                    top: Dimension::Points(4.0,),
-                    bottom: Dimension::Points(4.0,),
-                    start: Dimension::Points(4.0,),
-                    end: Dimension::Points(4.0,),
+                    top: Dimension::Points(4.0),
+                    bottom: Dimension::Points(4.0),
+                    start: Dimension::Points(4.0),
+                    end: Dimension::Points(4.0),
                 },
                 margin: stretch::geometry::Rect {
-                    top: Dimension::Points(4.0,),
-                    bottom: Dimension::Points(4.0,),
-                    start: Dimension::Points(8.0,),
-                    end: Dimension::Points(8.0,),
+                    top: Dimension::Points(4.0),
+                    bottom: Dimension::Points(4.0),
+                    start: Dimension::Points(8.0),
+                    end: Dimension::Points(8.0),
                 },
                 justify_content: JustifyContent::Center,
                 align_items: AlignItems::Center,
@@ -152,7 +152,6 @@ pub fn compute_layout() -> GameLayout {
         },
     )
     .unwrap();
-
 
     GameLayout {
         root,

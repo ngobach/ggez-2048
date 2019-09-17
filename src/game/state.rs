@@ -18,10 +18,11 @@ pub struct GameState {
 
 impl GameState {
     pub fn new(ctx: &mut Context) -> GameResult<Self> {
+        let layout = compute_layout();
         Ok(Self {
-            board: board::new(),
+            board: board::new(layout.board()),
             assets: assets::Assets::load(ctx)?,
-            layout: compute_layout(),
+            layout,
             score: 124_456,
         })
     }
@@ -40,7 +41,11 @@ impl EventHandler for GameState {
             [self.layout.title().w, self.layout.title().h],
             Align::Center,
         );
-        graphics::draw(ctx, &text, ([self.layout.title().x, self.layout.title().y],))?;
+        graphics::draw(
+            ctx,
+            &text,
+            ([self.layout.title().x, self.layout.title().y],),
+        )?;
         let mut score_bg = MeshBuilder::new()
             .rectangle(
                 DrawMode::fill(),
@@ -50,13 +55,17 @@ impl EventHandler for GameState {
             .build(ctx)?;
         graphics::draw(ctx, &score_bg, DrawParam::default());
         let mut score_text = graphics::Text::new(format!("Score: {}", self.score));
-        score_text.set_bounds([self.layout.score_text().w, self.layout.score_text().h], Align::Center);
+        score_text.set_bounds(
+            [self.layout.score_text().w, self.layout.score_text().h],
+            Align::Center,
+        );
         score_text.set_font(self.assets.fonts().normal(), Scale::uniform(24.));
         graphics::draw(
             ctx,
             &score_text,
             DrawParam::default().dest([self.layout.score_text().x, self.layout.score_text().y]),
-        ).unwrap();
+        )
+        .unwrap();
         graphics::present(ctx)?;
         Ok(())
     }
