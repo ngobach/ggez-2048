@@ -1,4 +1,5 @@
 mod common;
+mod consts;
 mod game;
 
 fn main() -> common::Result<()> {

@@ -8,3 +8,4 @@ const NORD_3: Color = Color::new(0.298, 0.337, 0.416, 1.0);
 
 pub const BACKGROUND: Color = NORD_2;
 pub const TITLE: Color = NORD_0;
+pub const SCORE_BG: Color = NORD_3;

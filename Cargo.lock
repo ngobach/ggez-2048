@@ -670,6 +670,7 @@ dependencies = [
  "ggez 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "mint 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "rand 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "stretch 0.3.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1868,6 +1869,15 @@ version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "stretch"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "lazy_static 1.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libm 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "strsim"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2440,6 +2450,7 @@ dependencies = [
 "checksum stdweb-derive 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "0e21ebd9179de08f2300a65454268a17ea3de204627458588c84319c4def3930"
 "checksum stdweb-internal-macros 0.2.7 (registry+https://github.com/rust-lang/crates.io-index)" = "e68f7d08b76979a43e93fe043b66d2626e35d41d68b0b85519202c6dd8ac59fa"
 "checksum stdweb-internal-runtime 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)" = "d52317523542cc0af5b7e31017ad0f7d1e78da50455e38d5657cd17754f617da"
+"checksum stretch 0.3.2 (registry+https://github.com/rust-lang/crates.io-index)" = "7b0dc6d20ce137f302edf90f9cd3d278866fd7fb139efca6f246161222ad6d87"
 "checksum strsim 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8ea5119cdb4c55b55d432abb513a0429384878c15dde60cc77b1c99de1a95a6a"
 "checksum syn 0.15.44 (registry+https://github.com/rust-lang/crates.io-index)" = "9ca4b3b69a77cbe1ffc9e198781b7acb0c7365a883670e8f1c1bc66fba79a5c5"
 "checksum syn 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)" = "66850e97125af79138385e9b88339cbcd037e3f28ceab8c5ad98e64f0f1f80bf"
