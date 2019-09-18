@@ -53,7 +53,7 @@ impl EventHandler for GameState {
                 super::colors::SCORE_BG,
             )
             .build(ctx)?;
-        graphics::draw(ctx, &score_bg, DrawParam::default());
+        graphics::draw(ctx, &score_bg, DrawParam::default())?;
         let mut score_text = graphics::Text::new(format!("Score: {}", self.score));
         score_text.set_bounds(
             [self.layout.score_text().w, self.layout.score_text().h],
@@ -64,8 +64,8 @@ impl EventHandler for GameState {
             ctx,
             &score_text,
             DrawParam::default().dest([self.layout.score_text().x, self.layout.score_text().y]),
-        )
-        .unwrap();
+        )?;
+        self.board.draw(ctx, self.layout.board().point())?;
         graphics::present(ctx)?;
         Ok(())
     }

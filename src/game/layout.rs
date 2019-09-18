@@ -13,7 +13,7 @@ pub struct GameLayout {
     board: Node,
 }
 
-fn to_rect(layout: &Layout) -> Rect {
+pub fn to_rect(layout: &Layout) -> Rect {
     Rect {
         x: layout.location.x,
         y: layout.location.y,
@@ -22,16 +22,16 @@ fn to_rect(layout: &Layout) -> Rect {
     }
 }
 
-struct RectChain(Rect);
+pub struct RectChain(Rect);
 
 impl RectChain {
-    fn chain(mut self, r: Rect) -> Self {
+    pub fn chain(mut self, r: Rect) -> Self {
         self.0.x += r.x;
         self.0.y += r.y;
         self
     }
 
-    fn from(r: Rect) -> RectChain {
+    pub fn from(r: Rect) -> RectChain {
         RectChain(r)
     }
 
