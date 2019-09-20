@@ -1,13 +1,13 @@
-use super::cell::Cell;
-use ggez::graphics::{self, DrawMode, DrawParam, MeshBuilder, Rect};
 use ggez::{Context, GameResult};
-
+use ggez::graphics::{self, DrawMode, DrawParam, MeshBuilder, Rect};
 use mint::Point2;
 use stretch::geometry::Size;
 use stretch::node::{Node, Stretch};
 use stretch::style::{Dimension, FlexWrap, Style};
 
-use super::layout::{to_rect, RectChain};
+use super::brush::rounded_rect;
+use super::cell::Cell;
+use super::layout::{RectChain, to_rect};
 
 pub struct Board {
     matrix: [[Cell; 4]; 4],
@@ -19,10 +19,7 @@ impl Board {
     pub fn draw(&self, ctx: &mut Context, dst: Point2<f32>) -> GameResult<()> {
         for i in 0..4 {
             for j in 0..4 {
-                let mut rect = MeshBuilder::new()
-                    .rectangle(DrawMode::fill(), self.cells[i][j], graphics::BLACK)
-                    .build(ctx)
-                    .unwrap();
+                let mut rect = rounded_rect(ctx, self.cells[i][j], 8., super::colors::CELL_COLORS[(i * 4 + j) % 12])?;
                 ggez::graphics::draw(ctx, &rect, DrawParam::default().dest(dst));
             }
         }
@@ -62,7 +59,7 @@ pub fn new(r: Rect) -> Board {
                 },
                 vec![child],
             )
-            .unwrap()
+                .unwrap()
         })
         .collect();
 

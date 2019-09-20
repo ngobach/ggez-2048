@@ -11,6 +11,7 @@ mod colors;
 mod fonts;
 mod layout;
 mod state;
+mod brush;
 
 pub struct Game {
     ctx: Context,

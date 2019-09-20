@@ -34,7 +34,7 @@ impl EventHandler for GameState {
     }
 
     fn draw(&mut self, ctx: &mut Context) -> Result<(), GameError> {
-        graphics::clear(ctx, super::colors::BACKGROUND);
+        graphics::clear(ctx, *super::colors::BACKGROUND);
         let mut text = graphics::Text::new("2048");
         text.set_font(self.assets.fonts().bold(), Scale::uniform(48.0));
         text.set_bounds(
@@ -50,7 +50,7 @@ impl EventHandler for GameState {
             .rectangle(
                 DrawMode::fill(),
                 self.layout.score(),
-                super::colors::SCORE_BG,
+                *super::colors::SCORE_BG,
             )
             .build(ctx)?;
         graphics::draw(ctx, &score_bg, DrawParam::default())?;

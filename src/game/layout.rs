@@ -116,6 +116,12 @@ pub fn compute_layout() -> GameLayout {
         .new_node(
             Style {
                 aspect_ratio: Number::Defined(1.0),
+                margin: stretch::geometry::Rect {
+                    top: Dimension::Points(4.0),
+                    bottom: Dimension::Points(4.0),
+                    start: Dimension::Points(4.0),
+                    end: Dimension::Points(4.0),
+                },
                 ..Default::default()
             },
             vec![],
