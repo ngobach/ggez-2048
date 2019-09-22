@@ -8,7 +8,7 @@ pub fn rounded_rect(ctx: &mut Context, rect: Rect, radius: f32, color: Color) ->
     mb.rectangle(fill, Rect::new(rect.x, rect.y + radius, rect.w, rect.h - radius * 2.), color);
     for x in [rect.x + radius, rect.x + rect.w - radius].into_iter() {
         for y in [rect.y + radius, rect.y + rect.h - radius].into_iter() {
-            mb.circle(fill, [*x, *y], radius, 0.1, color);
+            mb.circle(fill, [*x, *y], radius, 0.05, color);
         }
     }
     mb.build(ctx)
