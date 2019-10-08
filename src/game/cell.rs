@@ -12,15 +12,4 @@ pub enum Cell {
     Some {
         value: CellValue,
     },
-    Changing {
-        old: Option<CellValue>,
-        new: CellValue,
-        frames: u32,
-    },
-    Moving {
-        value: CellValue,
-        offset: MoveOffset,
-        new: Option<CellValue>,
-        frames: u32,
-    },
 }

@@ -1,12 +1,12 @@
 use ggez::event::EventHandler;
 use ggez::{graphics, Context, GameError, GameResult};
-use mint;
+use ggez::input::keyboard::{KeyCode, KeyMods};
 
 use super::{
     assets, board,
     layout::{compute_layout, GameLayout},
 };
-use ggez::graphics::{Align, DrawMode, DrawParam, MeshBuilder, Rect, Scale, BLACK};
+use ggez::graphics::{Align, DrawMode, DrawParam, MeshBuilder, Scale};
 
 pub struct GameState {
     board: board::Board,
@@ -31,6 +31,10 @@ impl GameState {
 impl EventHandler for GameState {
     fn update(&mut self, _ctx: &mut Context) -> Result<(), GameError> {
         Ok(())
+    }
+
+    fn key_down_event(&mut self, ctx: &mut Context, keycode: KeyCode, _keymods: KeyMods, _repeat: bool) {
+        self.board.next();
     }
 
     fn draw(&mut self, ctx: &mut Context) -> Result<(), GameError> {

@@ -15,15 +15,52 @@ pub struct Board {
     cells: [[Rect; 4]; 4],
 }
 
+fn pickOne<T: Clone>(items: Vec<T>) -> Option<T> {
+    let count = items.len();
+    if count == 0 {
+        return None
+    }
+    let it = rand::random::<usize>() % count;
+    Some(items[it].clone())
+}
+
 impl Board {
     pub fn draw(&self, ctx: &mut Context, dst: Point2<f32>) -> GameResult<()> {
         for i in 0..4 {
             for j in 0..4 {
-                let mut rect = rounded_rect(ctx, self.cells[i][j], 8., super::colors::CELL_COLORS[(i * 4 + j) % 12])?;
-                ggez::graphics::draw(ctx, &rect, DrawParam::default().dest(dst));
+                match self.matrix[i][j] {
+                    Cell::None => {
+                        let rect = rounded_rect(ctx, self.cells[i][j], 8., *super::colors::NORD_1)?;
+                        ggez::graphics::draw(ctx, &rect, DrawParam::default().dest(dst))?;
+                    },
+                    Cell::Some { value } => {
+                        let rect = rounded_rect(ctx, self.cells[i][j], 8., super::colors::CELL_COLORS[(i * 4 + j) % 12])?;
+                        let label = ggez::graphics::Text::new(format!("{}", 1 << value));
+                        ggez::graphics::draw(ctx, &rect, DrawParam::default().dest(dst))?;
+                        ggez::graphics::draw(ctx, &label, DrawParam::default().dest(dst))?;
+                    }
+                }
             }
         }
         Ok(())
+    }
+
+    pub fn next(&mut self) -> bool {
+        let mut candidates: Vec<(u8, u8)> = vec![];
+        for i in 0..4 {
+            for j in 0..4 {
+                if let Cell::None = self.matrix[i][j] {
+                    candidates.push((i as u8, j as u8));
+                }
+            }
+        }
+        let picked = pickOne(candidates);
+        if let Some(p) = picked {
+            self.matrix[p.0 as usize][p.1 as usize] = Cell::Some { value: 1 };
+            true
+        } else {
+            false
+        }
     }
 }
 
@@ -64,7 +101,7 @@ pub fn new(r: Rect) -> Board {
         .collect();
 
     let mut cells: [[Rect; 4]; 4] = Default::default();
-    let mut root = s
+    let root = s
         .new_node(
             Style {
                 size: Size {
