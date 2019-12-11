@@ -9,7 +9,5 @@ pub struct MoveOffset {
 #[derive(Copy, Clone)]
 pub enum Cell {
     None,
-    Some {
-        value: CellValue,
-    },
+    Some { value: CellValue },
 }

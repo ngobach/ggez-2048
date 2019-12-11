@@ -6,12 +6,12 @@ use std::path;
 
 mod assets;
 mod board;
+mod brush;
 mod cell;
 mod colors;
 mod fonts;
 mod layout;
 mod state;
-mod brush;
 
 pub struct Game {
     ctx: Context,

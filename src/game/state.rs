@@ -1,6 +1,6 @@
 use ggez::event::EventHandler;
-use ggez::{graphics, Context, GameError, GameResult};
 use ggez::input::keyboard::{KeyCode, KeyMods};
+use ggez::{graphics, Context, GameError, GameResult};
 
 use super::{
     assets, board,
@@ -13,17 +13,19 @@ pub struct GameState {
     assets: assets::Assets,
     layout: GameLayout,
 
-    score: u64,
+    score: u32,
 }
 
 impl GameState {
     pub fn new(ctx: &mut Context) -> GameResult<Self> {
         let layout = compute_layout();
+        let mut board = board::new(layout.board());
+        board.next();
         Ok(Self {
-            board: board::new(layout.board()),
+            board,
             assets: assets::Assets::load(ctx)?,
             layout,
-            score: 124_456,
+            score: 0,
         })
     }
 }
@@ -33,8 +35,25 @@ impl EventHandler for GameState {
         Ok(())
     }
 
-    fn key_down_event(&mut self, ctx: &mut Context, keycode: KeyCode, _keymods: KeyMods, _repeat: bool) {
-        self.board.next();
+    fn key_down_event(
+        &mut self,
+        ctx: &mut Context,
+        keycode: KeyCode,
+        keymods: KeyMods,
+        _repeat: bool,
+    ) {
+        let mut vector: Option<(i8, i8)> = match keycode {
+            KeyCode::Left => Some((-1, 0)),
+            KeyCode::Right => Some((1, 0)),
+            KeyCode::Up => Some((0, -1)),
+            KeyCode::Down => Some((0, 1)),
+            _ => None,
+        };
+        if let Some(v) = vector {
+            let bonus = self.board.send_vec(v);
+            self.board.next();
+            self.score += bonus;
+        }
     }
 
     fn draw(&mut self, ctx: &mut Context) -> Result<(), GameError> {
@@ -69,7 +88,8 @@ impl EventHandler for GameState {
             &score_text,
             DrawParam::default().dest([self.layout.score_text().x, self.layout.score_text().y]),
         )?;
-        self.board.draw(ctx, self.layout.board().point(), &self.assets)?;
+        self.board
+            .draw(ctx, self.layout.board().point(), &self.assets)?;
         graphics::present(ctx)?;
         Ok(())
     }
