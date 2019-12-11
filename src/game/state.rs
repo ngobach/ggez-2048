@@ -69,7 +69,7 @@ impl EventHandler for GameState {
             &score_text,
             DrawParam::default().dest([self.layout.score_text().x, self.layout.score_text().y]),
         )?;
-        self.board.draw(ctx, self.layout.board().point())?;
+        self.board.draw(ctx, self.layout.board().point(), &self.assets)?;
         graphics::present(ctx)?;
         Ok(())
     }

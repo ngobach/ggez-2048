@@ -1,5 +1,5 @@
 use ggez::{Context, GameResult};
-use ggez::graphics::{self, DrawMode, DrawParam, MeshBuilder, Rect, Align};
+use ggez::graphics::{self, DrawMode, DrawParam, MeshBuilder, Rect, Align, Scale};
 use mint::Point2;
 use stretch::geometry::Size;
 use stretch::node::{Node, Stretch};
@@ -25,7 +25,7 @@ fn pick_one<T: Clone>(items: Vec<T>) -> Option<T> {
 }
 
 impl Board {
-    pub fn draw(&self, ctx: &mut Context, dst: Point2<f32>) -> GameResult<()> {
+    pub fn draw(&self, ctx: &mut Context, dst: Point2<f32>, asset: & super::assets::Assets) -> GameResult<()> {
         for i in 0..4 {
             for j in 0..4 {
                 match self.matrix[i][j] {
@@ -36,12 +36,13 @@ impl Board {
                     Cell::Some { value } => {
                         let rect = rounded_rect(ctx, self.cells[i][j], 8., super::colors::CELL_COLORS[(i * 4 + j) % 12])?;
                         let mut label = ggez::graphics::Text::new(format!("{}", 1 << value));
+                        label.set_font(asset.fonts().normal(), Scale::uniform(24.));
                         let cell = &self.cells[i][j];
                         label.set_bounds([cell.w, cell.h], Align::Center);
                         ggez::graphics::draw(ctx, &rect, DrawParam::default().dest(dst))?;
                         ggez::graphics::draw(ctx, &label, DrawParam::default().dest([
                             dst.x + cell.x,
-                            dst.y + cell.y,
+                            dst.y + cell.y + 28.,
                         ]))?;
                     }
                 }
