@@ -1,6 +1,6 @@
+use core::result::Result as CoreResult;
 use std::error::Error as StdError;
-use std::fmt::{Display, Formatter, Error as FmtError};
-use core::result::{Result as CoreResult};
+use std::fmt::{Display, Error as FmtError, Formatter};
 
 #[derive(Debug)]
 pub struct Error {
@@ -10,7 +10,7 @@ pub struct Error {
 impl Error {
     pub fn new<T: AsRef<str>>(s: T) -> Self {
         Self {
-            message: s.as_ref().to_string()
+            message: s.as_ref().to_string(),
         }
     }
 
