@@ -113,6 +113,18 @@ impl Board {
             }
             dummy
         }
+        fn pull_left(m: &mut [[Cell; 4]; 4]) {
+            for turn in 0..4 {
+                for i in 0..4 {
+                    for j in 1..4 {
+                        if let (Cell::None, Cell::Some { value: _ }) = (m[i][j-1], m[i][j]) {
+                            m[i][j-1] = m[i][j];
+                            m[i][j] = Cell::None;
+                        }
+                    }
+                }
+            }
+        }
         let mut vec = v.clone();
         let mut mat = self.matrix.clone();
         // Rotate until vector point to left
@@ -120,6 +132,7 @@ impl Board {
             mat = rotate_mat(mat);
             vec = rotate_vec(vec);
         }
+        pull_left(&mut mat);
         for i in 0..4 {
             for j in 0..3 {
                 if let (Cell::Some { value: n1 }, Cell::Some { value: n2 }) = (mat[i][j], mat[i][j+1]) {
@@ -131,16 +144,7 @@ impl Board {
                 }
             }
         }
-        for turn in 0..4 {
-            for i in 0..4 {
-                for j in 1..4 {
-                    if let (Cell::None, Cell::Some { value: _ }) = (mat[i][j-1], mat[i][j]) {
-                        mat[i][j-1] = mat[i][j];
-                        mat[i][j] = Cell::None;
-                    }
-                }
-            }
-        }
+        pull_left(&mut mat);
         while v != vec {
             vec = rotate_vec(vec);
             mat = rotate_mat(mat);
